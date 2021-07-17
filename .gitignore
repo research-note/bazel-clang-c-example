@@ -1,0 +1,13 @@
+*~
+bazel-*
+
+.idea
+# Eclipse
+.project
+.classpath
+.settings/
+# Maven
+target/
+
+# tags
+tags
