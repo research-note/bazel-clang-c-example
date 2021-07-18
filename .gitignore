@@ -1,6 +1,9 @@
 *~
 bazel-*
 
+*.out
+*.o
+
 .idea
 # Eclipse
 .project
