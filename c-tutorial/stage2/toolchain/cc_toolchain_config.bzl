@@ -9,10 +9,16 @@ load(
     "tool_path",
 )
 
-all_link_actions = [ # NEW
-    ACTION_NAMES.c_link_executable,
-    ACTION_NAMES.c_link_dynamic_library,
-    ACTION_NAMES.c_link_nodeps_dynamic_library,
+all_compile_actions = [
+    ACTION_NAMES.c_compile,
+    ACTION_NAMES.cpp_link_static_library,
+    ACTION_NAMES.llvm_cov
+]
+
+all_link_actions = [
+    ACTION_NAMES.cpp_link_executable,
+    ACTION_NAMES.cpp_link_dynamic_library,
+    ACTION_NAMES.cpp_link_nodeps_dynamic_library,
 ]
 
 def _impl(ctx):
@@ -23,31 +29,31 @@ def _impl(ctx):
         ),
         tool_path(
             name = "ld",
-            path = "/usr/bin/ld",
+            path = "/usr/bin/lld-12",
         ),
         tool_path(
             name = "ar",
-            path = "/bin/false",
+            path = "/usr/bin/llvm-ar-12",
         ),
         tool_path(
             name = "cpp",
-            path = "/bin/false",
+            path = "/usr/bin/clang++-12",
         ),
         tool_path(
             name = "gcov",
-            path = "/bin/false",
+            path = "/usr/bin/llvm-cov-12",
         ),
         tool_path(
             name = "nm",
-            path = "/bin/false",
+            path = "/usr/bin/llvm-nm-12",
         ),
         tool_path(
             name = "objdump",
-            path = "/bin/false",
+            path = "/usr/bin/llvm-objcopy-12",
         ),
         tool_path(
             name = "strip",
-            path = "/bin/false",
+            path = "/usr/bin/llvm-strip-12",
         ),
     ]
 
@@ -62,7 +68,9 @@ def _impl(ctx):
                     flag_groups = ([
                         flag_group(
                             flags = [
-
+                                "-pg",
+                                "-Og",
+                                "-Wall"
                             ],
                         ),
                     ]),

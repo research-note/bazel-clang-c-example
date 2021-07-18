@@ -10,6 +10,3 @@ build:clang_config --cpu=k8
 # build.
 
 build:clang_config --host_crosstool_top=@bazel_tools//tools/cpp:toolchain
-
-# pg option for uftrace
-build:clang_config --cxxopt="-pg"
